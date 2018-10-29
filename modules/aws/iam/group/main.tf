@@ -2,7 +2,6 @@ provider "aws" {}
 
 locals {
   group_name = "${var.env_type}_${var.group_name}"
-  action     = "create"
 }
 
 resource "aws_iam_group" "group" {
@@ -18,6 +17,4 @@ resource "aws_iam_group" "group" {
 resource "aws_iam_group_policy_attachment" "attach" {
   group      = "${local.group_name}"
   policy_arn = "${var.policy_arn}"
-
-  count = "${local.action == "create" ? 1 : 0}"
 }
